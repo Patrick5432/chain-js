@@ -10,6 +10,47 @@ class SinglyLinkedList {
         this.head = null;
         this.length = 0;
     }
+    
+    addBack(value) {
+        const newNode = new Node(value, null);
+
+        if (!this.head) {
+            // Если список пуст, новый элемент становится его началом
+            this.head = newNode;
+        } else {
+            let current = this.head;
+            while (current.next) {
+                current = current.next;
+            }
+            current.next = newNode;
+        }
+
+        this.length++;
+    }
+
+    deleteBack() {
+        if (!this.head) {
+            // Если список пуст, ничего не делаем
+            return;
+        }
+
+        if (!this.head.next) {
+            // Если в списке только один элемент, делаем список пустым
+            this.head = null;
+        } else {
+            let current = this.head;
+            let previous = null;
+
+            while (current.next) {
+                previous = current;
+                current = current.next;
+            }
+
+            previous.next = null;
+        }
+
+        this.length--;
+    }
 
     getValueByIndex(index) {
         if (index < 0 || index >= this.length) {
